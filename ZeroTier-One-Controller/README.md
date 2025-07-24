@@ -1,12 +1,12 @@
 # README.md
 ### Note:
-This will build a ZeroTier-One controller!
+This will build a ZeroTier-One controller.
 
-# Build the image
+### Build 
 ```
 sudo docker build -t zerotier-controller:1.14.0 .
 ```
-# Run the container
+### Run 
 ```
 sudo docker run -d \
   --cap-add=NET_ADMIN \
