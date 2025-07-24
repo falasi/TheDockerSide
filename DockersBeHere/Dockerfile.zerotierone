@@ -1,0 +1,17 @@
+# This is my ZeroTier Alpine Dockerfile
+# Built for lightweight VPN usage
+
+FROM alpine:latest
+
+ARG VERSION=1.8.6
+
+RUN apk add --no-cache curl bash libcap iproute2 iptables
+
+RUN curl -L -o /usr/local/bin/zerotier-one \
+    https://download.zerotier.com/RELEASES/${VERSION}/dist/zerotier-one-static-linux-x64 \
+    && chmod +x /usr/local/bin/zerotier-one
+
+# Optional: set capabilities to allow ZeroTier to manage network interfaces
+RUN setcap cap_net_admin,cap_net_bind_service,cap_net_raw+ep /usr/local/bin/zerotier-one
+
+CMD ["/usr/local/bin/zerotier-one", "-d"]
