@@ -2,7 +2,7 @@
 # Release: https://download.zerotier.com/RELEASES/
 # Build:  sudo docker build -t zerotier-bookworm:1.14.0 .
 # Run: sudo docker run -d --cap-add=NET_ADMIN --cap-add=SYS_ADMIN --device=/dev/net/tun --name zerotier zerotier-bookworm:1.14.0
-# Shell: sudo docker exec -it zerotier /bin/sh
+# Shell: sudo docker exec -it zerotier /bin/bash
 
 FROM debian:bookworm-slim
 
