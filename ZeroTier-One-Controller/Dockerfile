@@ -31,7 +31,7 @@ RUN useradd -r -s /bin/false zerotier-one || true \
 # Clone ztncui and install Node modules
 RUN git clone https://github.com/key-networks/ztncui /opt/ztncui \
     && cd /opt/ztncui/src \
-    && npm ci --only=production \
+    && npm install --omit=dev \
     && cp -v etc/default.passwd etc/passwd \
     && npm cache clean --force
 
