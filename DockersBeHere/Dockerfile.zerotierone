@@ -1,21 +1,17 @@
 # This is my ZeroTier Alpine Dockerfile
-# Built for lightweight VPN usage
-# Build:  sudo docker build -t zerotier-alpine --build-arg VERSION=1.8.6 . # Adjust the version 
-# Run: docker run -d --cap-add=NET_ADMIN --cap-add=SYS_ADMIN --device=/dev/net/tun --name zerotier zerotier-alpine zerotier-one
-# Shell: docker exec -it zerotier /bin/sh
-# Wiki: https://docs.zerotier.com/docker/
+# Release: https://download.zerotier.com/RELEASES/
+# Build:  sudo docker build -t zerotier-bookworm:1.14.0 .
+# Run: sudo docker run -d --cap-add=NET_ADMIN --cap-add=SYS_ADMIN --device=/dev/net/tun --name zerotier zerotier-bookworm:1.14.0
+# Shell: sudo docker exec -it zerotier /bin/sh
 
-FROM alpine:latest
+FROM debian:bookworm-slim
 
-ARG VERSION=1.8.6
+ARG VERSION=1.14.0
 
-RUN apk add --no-cache curl bash libcap iproute2 iptables
+RUN apt-get update && apt-get install -y curl iproute2 iptables libcap2-bin \
+  && curl -LO https://download.zerotier.com/RELEASES/${VERSION}/dist/debian/bookworm/zerotier-one_${VERSION}_amd64.deb \
+  && dpkg -i zerotier-one_${VERSION}_amd64.deb \
+  && rm zerotier-one_${VERSION}_amd64.deb \
+  && rm -rf /var/lib/apt/lists/*
 
-RUN curl -L -o /usr/local/bin/zerotier-one \
-    https://download.zerotier.com/RELEASES/${VERSION}/dist/zerotier-one-static-linux-x64 \
-    && chmod +x /usr/local/bin/zerotier-one
-
-# Optional: set capabilities to allow ZeroTier to manage network interfaces
-RUN setcap cap_net_admin,cap_net_bind_service,cap_net_raw+ep /usr/local/bin/zerotier-one
-
-CMD ["/usr/local/bin/zerotier-one", "-d"]
+CMD ["/usr/sbin/zerotier-one"]
