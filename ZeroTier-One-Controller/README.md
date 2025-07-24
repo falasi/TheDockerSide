@@ -17,3 +17,13 @@ sudo docker run -d \
   -p 9993:9993 \
   zerotier-controller:1.14.0
 ```
+
+### Connect to Web GUI
+```
+http://IP:3000/
+````
+
+### Default ztncui Credentials
+User: admin
+Password: password
+
