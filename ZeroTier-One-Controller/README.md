@@ -9,6 +9,7 @@ sudo docker build -t zerotier-controller:1.14.0 .
 ### Run 
 ```
 sudo docker run -d \
+  --network host \
   --cap-add=NET_ADMIN \
   --cap-add=SYS_ADMIN \
   --device=/dev/net/tun \
