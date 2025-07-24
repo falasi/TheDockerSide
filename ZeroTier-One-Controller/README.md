@@ -32,6 +32,8 @@ docker run -d \
 ```
 
 ### Option 2: Port Mapping
+Note: May cause issues with NAT traversal and peer discovery
+
 ```bash
 docker run -d \
   --name zerotier-controller \
