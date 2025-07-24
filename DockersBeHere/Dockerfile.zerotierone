@@ -1,5 +1,9 @@
 # This is my ZeroTier Alpine Dockerfile
 # Built for lightweight VPN usage
+# Build:  sudo docker build -t zerotier-alpine --build-arg VERSION=1.8.6 . # Adjust the version 
+# Run: docker run -d --cap-add=NET_ADMIN --cap-add=SYS_ADMIN --device=/dev/net/tun --name zerotier zerotier-alpine zerotier-one
+# Shell: docker exec -it zerotier /bin/sh
+# Wiki: https://docs.zerotier.com/docker/
 
 FROM alpine:latest
 
