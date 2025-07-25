@@ -17,21 +17,24 @@ docker build -t zerotier-controller:1.14.0 .
 ```
 
 ## Run
-### Create a directory on your host machine to store Zerotier controller data persistently:
+### Create a moon directory on your host machine:
 ```
-mkdir -p /opt/docker/zerotier-controller 
+sudo mkdir -p /opt/docker/zerotier-moons
+sudo cp /path/to/your/*.moon /opt/docker/zerotier-moons/
+sudo chmod 644 /opt/docker/zerotier-moons/*.moon
 ```
 
 ### Run Zerotier Controller Container (Recommended: Host Networking)
 ```bash
-docker run -d \
+sudo docker run -d \
   --name zerotier-controller \
   --network host \
   --cap-add=NET_ADMIN \
   --cap-add=SYS_ADMIN \
   --device=/dev/net/tun \
   --restart unless-stopped \
-  -v /opt/docker/zerotier-controller:/var/lib/zerotier-one \
+  -v zerotier-data:/var/lib/zerotier-one \
+  -v /opt/docker/zerotier-moons:/var/lib/zerotier-one/moons.d:ro \
   zerotier-controller:1.14.0
 ```
 
