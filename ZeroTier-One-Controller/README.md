@@ -38,14 +38,6 @@ sudo docker run -d \
   zerotier-controller:1.14.0
 ```
 
-### Add Moon Configuration (Optional) 
-Place your moon configuration files inside /opt/docker/zerotier-controller/moon.d/
-```
-mkdir -p /opt/docker/zerotier-controller/moon.d/
-sudo chown -R zerotier-one: /opt/docker/zerotier-controller/moon.d/ # Add your moon config /opt/docker/zerotier-controller/moon.d/
-docker restart zerotier-controller
-```
-
 ## Access Web Interface
 
 Once running, access the web interface at:
