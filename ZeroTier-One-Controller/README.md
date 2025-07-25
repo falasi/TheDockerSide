@@ -39,7 +39,7 @@ docker run -d \
 Place your moon configuration files inside /opt/docker/zerotier-controller/moon.d/
 ```
 mkdir -p /opt/docker/zerotier-controller/moon.d/
-sudo chown chown -R zerotier-one: /opt/docker/zerotier-controller/moon.d/ # Add your moon config /opt/docker/zerotier-controller/moon.d/
+sudo chown -R zerotier-one: /opt/docker/zerotier-controller/moon.d/ # Add your moon config /opt/docker/zerotier-controller/moon.d/
 docker restart zerotier-controller
 ```
 
