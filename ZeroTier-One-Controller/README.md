@@ -17,8 +17,12 @@ docker build -t zerotier-controller:1.14.0 .
 ```
 
 ## Run
+### Create a directory on your host machine to store Zerotier controller data persistently:
+```
+mkdir -p /opt/docker/zerotier-controller 
+```
 
-### Option 1: Host Networking (Recommended)
+### Run Zerotier Controller Container (Recommended: Host Networking)
 ```bash
 docker run -d \
   --name zerotier-controller \
@@ -27,24 +31,16 @@ docker run -d \
   --cap-add=SYS_ADMIN \
   --device=/dev/net/tun \
   --restart unless-stopped \
-  -v zerotier-data:/var/lib/zerotier-one \
+  -v /opt/docker/zerotier-controller:/var/lib/zerotier-one \
   zerotier-controller:1.14.0
 ```
 
-### Option 2: Port Mapping
-Note: May cause issues with NAT traversal and peer discovery
-
-```bash
-docker run -d \
-  --name zerotier-controller \
-  --cap-add=NET_ADMIN \
-  --cap-add=SYS_ADMIN \
-  --device=/dev/net/tun \
-  --restart unless-stopped \
-  -p 3000:3000 \
-  -p 9993:9993 \
-  -v zerotier-data:/var/lib/zerotier-one \
-  zerotier-controller:1.14.0
+### Add Moon Configuration (Optional) 
+Place your moon configuration files inside /opt/docker/zerotier-controller/moon.d/
+```
+mkdir -p /opt/docker/zerotier-controller/moon.d/
+sudo chown chown -R zerotier-one: /opt/docker/zerotier-controller/moon.d/ # Add your moon config /opt/docker/zerotier-controller/moon.d/
+docker restart zerotier-controller
 ```
 
 ## Access Web Interface
